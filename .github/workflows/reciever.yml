@@ -1,0 +1,17 @@
+name: Triggered Workflow
+
+on:
+  repository_dispatch:
+    types: [my-event]
+
+jobs:
+  myJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # Add the rest of your job steps here
+      - name: echo pr id
+        run: echo "${{ github.event.client_payload.pr-id }}"
+
+
