@@ -22,11 +22,12 @@ jobs:
       # Add the rest of your job steps here
       - name: Set environment variable
         run: |
-          echo "TEST_LANG=${{ github.event.inputs.test_lang }}" >> $GITHUB_ENV
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "TEST_ID=m" >> $GITHUB_ENV
+            echo "TEST_LANG=${{ github.event.inputs.test_lang }}" >> $GITHUB_ENV
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             echo "TEST_ID=${{ github.event.client_payload.pr-id }}" >> $GITHUB_ENV
+            echo "TEST_LANG=TH" >> $GITHUB_ENV
           fi
       - name: echo pr id
         run: |
